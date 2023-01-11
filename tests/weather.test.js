@@ -59,28 +59,29 @@ describe('GET /location', () => {
 })
 
 describe('GET /current/:city?', () => {
-    let server;
+    let app;
 
     beforeAll(async () => {
-        server = fastify();
-        WeatherRoute(server);
+        app = fastify();
+        WeatherRoute(app);
         app.addHook('onRequest',handleFakeIp);
-        await server.listen(0);
+        await app.listen(0);
     });
 
-    afterAll(async () => { await server.close() });
+    afterAll(async () => { await app.close() });
 
     test('Correctly return data with city', async () => {
         const fakeCity = faker.address.city();
-        const response = await request(server.server).get(`/current/${fakeCity}`);
+        const response = await request(app.server).get(`/current/${fakeCity}`);
 
+        console.log(response.body)
         expect(response.statusCode).toEqual(200);
         expect(response.headers['content-type']).toEqual('application/json; charset=utf-8');
         expect(response.body).toHaveProperty('data');
     });
 
     test('Correctly return data without city', async () => {
-        const response = await request(server.server).get(`/current`);
+        const response = await request(app.server).get(`/current`);
 
         expect(response.statusCode).toEqual(200);
         expect(response.headers['content-type']).toEqual('application/json; charset=utf-8');
@@ -89,7 +90,7 @@ describe('GET /current/:city?', () => {
 
     test('Failure with wrong city', async () => {
         const fakeCity = 'Gotham City';
-        const response = await request(server.server).get(`/current/${fakeCity}`);
+        const response = await request(app.server).get(`/current/${fakeCity}`);
 
         expect(response.statusCode).toEqual(404);
         expect(response.headers['content-type']).toEqual('application/json; charset=utf-8');
@@ -97,20 +98,20 @@ describe('GET /current/:city?', () => {
 })
 
 describe('GET /forecast/:city?', () => {
-    let server;
+    let app;
 
     beforeAll(async () => {
-        server = fastify();
-        WeatherRoute(server);
+        app = fastify();
+        WeatherRoute(app);
         app.addHook('onRequest',handleFakeIp);
-        await server.listen(0);
+        await app.listen(0);
     });
 
-    afterAll(async () => { await server.close() });
+    afterAll(async () => { await app.close() });
 
     test('Correctly return data with city', async () => {
         const fakeCity = faker.address.city();
-        const response = await request(server.server).get(`/forecast/${fakeCity}`);
+        const response = await request(app.server).get(`/forecast/${fakeCity}`);
 
         expect(response.statusCode).toEqual(200);
         expect(response.headers['content-type']).toEqual('application/json; charset=utf-8');
@@ -119,7 +120,7 @@ describe('GET /forecast/:city?', () => {
 
     test('Correctly return data withouth city', async () => {
         const fakeCity = faker.address.city();
-        const response = await request(server.server).get(`/current/${fakeCity}`);
+        const response = await request(app.server).get(`/current/${fakeCity}`);
 
         expect(response.statusCode).toEqual(200);
         expect(response.headers['content-type']).toEqual('application/json; charset=utf-8');
@@ -128,7 +129,7 @@ describe('GET /forecast/:city?', () => {
 
     test('Failure with wrong city', async () => {
         const fakeCity = 'Azkaban';
-        const response = await request(server.server).get(`/current/${fakeCity}`);
+        const response = await request(app.server).get(`/current/${fakeCity}`);
 
         expect(response.statusCode).toEqual(404);
         expect(response.headers['content-type']).toEqual('application/json; charset=utf-8');
