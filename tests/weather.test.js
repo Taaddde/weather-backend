@@ -16,7 +16,7 @@ describe('GET /location', () => {
         app = fastify();
         app.addHook('onRequest',handleFakeIp);
         WeatherRoute(app);
-        await app.listen(0);
+        await app.listen({port: 0});
     });
 
     afterAll(async () => { await app.close() });
@@ -65,22 +65,21 @@ describe('GET /current/:city?', () => {
         app = fastify();
         WeatherRoute(app);
         app.addHook('onRequest',handleFakeIp);
-        await app.listen(0);
+        await app.listen({port: 0});
     });
 
     afterAll(async () => { await app.close() });
 
-    test('Correctly return data with city', async () => {
+    test('Correctly current return data with city', async () => {
         const fakeCity = faker.address.city();
         const response = await request(app.server).get(`/current/${fakeCity}`);
 
-        console.log(response.body)
         expect(response.statusCode).toEqual(200);
         expect(response.headers['content-type']).toEqual('application/json; charset=utf-8');
         expect(response.body).toHaveProperty('data');
     });
 
-    test('Correctly return data without city', async () => {
+    test('Correctly current return data without city', async () => {
         const response = await request(app.server).get(`/current`);
 
         expect(response.statusCode).toEqual(200);
@@ -88,7 +87,7 @@ describe('GET /current/:city?', () => {
         expect(response.body).toHaveProperty('data');
     });
 
-    test('Failure with wrong city', async () => {
+    test('Failure current with wrong city', async () => {
         const fakeCity = 'Gotham City';
         const response = await request(app.server).get(`/current/${fakeCity}`);
 
@@ -104,12 +103,12 @@ describe('GET /forecast/:city?', () => {
         app = fastify();
         WeatherRoute(app);
         app.addHook('onRequest',handleFakeIp);
-        await app.listen(0);
+        await app.listen({port: 0});
     });
 
     afterAll(async () => { await app.close() });
 
-    test('Correctly return data with city', async () => {
+    test('Correctly forecast return data with city', async () => {
         const fakeCity = faker.address.city();
         const response = await request(app.server).get(`/forecast/${fakeCity}`);
 
@@ -118,7 +117,7 @@ describe('GET /forecast/:city?', () => {
         expect(response.body).toHaveProperty('data');
     });
 
-    test('Correctly return data withouth city', async () => {
+    test('Correctly forecast return data withouth city', async () => {
         const fakeCity = faker.address.city();
         const response = await request(app.server).get(`/current/${fakeCity}`);
 
@@ -127,7 +126,7 @@ describe('GET /forecast/:city?', () => {
         expect(response.body).toHaveProperty('data');
     });
 
-    test('Failure with wrong city', async () => {
+    test('Failure forecast with wrong city', async () => {
         const fakeCity = 'Azkaban';
         const response = await request(app.server).get(`/current/${fakeCity}`);
 
