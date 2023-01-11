@@ -1,14 +1,10 @@
-const fastify = require('fastify')({ logger: true })
-require('dotenv').config()
+const { build } = require("./app.js");
+const app = build({ logger: true });
 
-fastify.get('/', function (request, reply) {
-  reply.send({ hello: 'world' })
-})
-
-fastify.listen({ port: 3000 }, function (err, address) {
+app.listen(process.env.PORT || 3000, "0.0.0.0", (err, address) => {
   if (err) {
-    fastify.log.error(err)
-    process.exit(1)
+    console.log(err);
+    process.exit(1);
   }
-  console.info(`Server is now listening on ${address}`);
-})
+  console.info(`Server ready in port ${address}`)
+});
