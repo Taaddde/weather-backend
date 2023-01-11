@@ -1,3 +1,3 @@
 module.exports = {
-    WeatherController: require('./weather.controller'),
+  WeatherController: require('./weather.controller')
 }

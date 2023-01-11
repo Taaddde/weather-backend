@@ -1,3 +1,3 @@
 module.exports = {
-    WeatherRoute: require('./weather.route'),
+  WeatherRoute: require('./weather.route')
 }
