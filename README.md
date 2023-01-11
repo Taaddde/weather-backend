@@ -37,7 +37,7 @@ Para ejecutar este proyecto, se requiere tener un archivo .env ubicado en la ra√
 #### Current
 
 ```http
-  GET /v1/current/:city?
+  GET /v1/current/${city}
 ```
 
 | Parameter | Type     | Description                       |
@@ -47,7 +47,7 @@ Para ejecutar este proyecto, se requiere tener un archivo .env ubicado en la ra√
 #### Forecast
 
 ```http
-  GET /v1/forecast/:city?
+  GET /v1/forecast/${city}
 ```
 
 | Parameter | Type     | Description                       |
