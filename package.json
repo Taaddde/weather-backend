@@ -1,0 +1,32 @@
+{
+  "name": "weather-backend",
+  "version": "1.0.0",
+  "description": "Este repositorio contiene una API REST de clima construida con Node.js. La API proporciona acceso a datos meteorológicos en tiempo real y históricos, como la temperatura, la humedad, la presión atmosférica y la velocidad del viento en una ubicación específica.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "nodemon ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Taaddde/weather-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Taaddde/weather-backend/issues"
+  },
+  "homepage": "https://github.com/Taaddde/weather-backend#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "fastify": "^4.11.0",
+    "ipapi": "^4.0.0",
+    "should": "^13.2.3",
+    "supertest": "^6.3.3"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "nodemon": "^2.0.20"
+  }
+}
