@@ -20,13 +20,12 @@
   "homepage": "https://github.com/Taaddde/weather-backend#readme",
   "dependencies": {
     "dotenv": "^16.0.3",
-    "fastify": "^4.11.0",
-    "ipapi": "^4.0.0",
-    "should": "^13.2.3",
-    "supertest": "^6.3.3"
+    "fastify": "^4.11.0"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "should": "^13.2.3",
+    "supertest": "^6.3.3"
   }
 }
