@@ -3,7 +3,7 @@ const { IpService, WeatherService } = require('../services')
 const getLocation = async (req, res) => {
   const data = await IpService.getData(req.ip)
 
-  res.send({ data })
+  res.status(data.status === 'success' ? 200 : 404).send({ data })
 }
 
 const getCurrent = async (req, res) => {
@@ -16,7 +16,11 @@ const getCurrent = async (req, res) => {
     data = await WeatherService.getCurrentByCoords(lat, lon)
   }
 
-  res.send({ data })
+  if (data && data.weather) {
+    return res.send({ data })
+  } else {
+    return res.status(404).send({ data })
+  }
 }
 
 const getForecast = async (req, res) => {
@@ -29,7 +33,11 @@ const getForecast = async (req, res) => {
     data = await WeatherService.getForecastByCoords(lat, lon)
   }
 
-  res.send({ data })
+  if (data && data.list) {
+    return res.send({ data })
+  } else {
+    return res.status(404).send({ data })
+  }
 }
 
 module.exports = {
