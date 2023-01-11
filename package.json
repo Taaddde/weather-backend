@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "start:dev": "nodemon ./src/index.js",
+    "start": "node ./src/index.js",
     "lint": "eslint --fix --ext .js,.jsx ."
   },
   "repository": {
