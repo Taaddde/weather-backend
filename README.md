@@ -21,6 +21,8 @@ Instalar módulos
   npm i
 ```
 
+Se recomienda usar una versión de node ^19.0.0
+
 
 ## Variables de entorno
 
